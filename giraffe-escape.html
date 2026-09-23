@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giraffe Escape | Salma Momani</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="project-pages.css">
+</head>
+<body>
+<main class="project-page">
+<div class="project-page-inner">
+<a class="back-link" href="index.html#btec-projects">← Back to My Projects</a>
+<header class="project-page-header">
+<span class="eyebrow">BTEC LEVEL 3</span>
+<h1>Giraffe Escape</h1>
+<p>A 2D platform game developed in GameMaker where the player controls a giraffe, collects stars, avoids enemies and progresses through different levels.</p>
+</header>
+
+<div class="project-gallery">
+<div class="gallery-frame">
+<img id="galleryImage" src="images/level3/giraffe-escape/1.png" alt="Giraffe Escape screenshot">
+<div class="gallery-empty" id="galleryEmpty" style="display:none">No screenshots available for this project yet.</div>
+</div>
+<button class="gallery-arrow gallery-prev" id="prev" aria-label="Previous image">‹</button>
+<button class="gallery-arrow gallery-next" id="next" aria-label="Next image">›</button>
+<div class="gallery-counter" id="counter">1 / 5</div>
+</div>
+
+<section class="project-info">
+<div class="project-tags"><span>GameMaker</span><span>GML</span><span>2D Game</span></div>
+</section>
+</div>
+</main>
+<script>
+const images = ["images/level3/giraffe-escape/1.png", "images/level3/giraffe-escape/2.png", "images/level3/giraffe-escape/3.png", "images/level3/giraffe-escape/4.png", "images/level3/giraffe-escape/5.png"];
+let index = 0;
+const img = document.getElementById("galleryImage");
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
+const counter = document.getElementById("counter");
+const empty = document.getElementById("galleryEmpty");
+
+function update(){
+    if(!images.length){
+        img.style.display="none";
+        prev.style.display="none";
+        next.style.display="none";
+        counter.style.display="none";
+        empty.style.display="flex";
+        return;
+    }
+    img.src=images[index];
+    counter.textContent=(index+1)+" / "+images.length;
+    const arrows=images.length>1;
+    prev.style.display=arrows?"block":"none";
+    next.style.display=arrows?"block":"none";
+}
+prev.addEventListener("click",()=>{ index=(index-1+images.length)%images.length; update(); });
+next.addEventListener("click",()=>{ index=(index+1)%images.length; update(); });
+document.addEventListener("keydown",e=>{
+    if(e.key==="ArrowLeft" && images.length>1) prev.click();
+    if(e.key==="ArrowRight" && images.length>1) next.click();
+});
+update();
+</script>
+</body>
+</html>
